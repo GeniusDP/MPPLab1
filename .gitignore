@@ -1,0 +1,11 @@
+/Task1/bin
+/Task1/obj
+/Task1/*.cbp
+/Task1/*.depend
+/Task1/*.layout
+
+/Task2/bin
+/Task2/obj
+/Task2/*.cbp
+/Task2/*.depend
+/Task2/*.layout

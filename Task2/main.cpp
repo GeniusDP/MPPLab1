@@ -6,48 +6,50 @@
 
 using namespace std;
 
+/*
+    Task 2
+*/
+
+
+/*
+    This is lab work 1
+    on MPP
+    Author: B. Zaranik
+
+    stop-words list:
+    (prepositions)
+    --------------
+    the
+    for
+    in
+    on
+    a
+    an
+    of
+    to
+    at
+    by
+    onto
+    into
+
+    are
+    but
+    is
+    and
+    not
+    or
+    --------------
+    (is hardcoded)
+*/
+
 int main()
 {
-    ifstream in("input.txt");
-    vector<pair<string, vector<int>>> wordsOnPages;
-    int pageCounter = 0;
-
-    while(true){
-        pageCounter++;
-        int cnt = 0;
-        string s;
-        while( getline(in, s, '\n') && ++cnt <= 45 ){
-            cout << "---" << endl;
-            cout << s << endl;
-            /*vector<string> words;
-            int i;
-            int left;
-            bool leftIsSet;
-            int lineLength = 0;
-                i = 0;
-                while( s[i] != '\0' ){
-                    i++;
-                }
-                lineLength = i;
-
-
-
-            left = 0;
-            while( left < lineLength && s[left] == ' ' ){
-                left++;
-            }
-
-            i = left;
-            leftIsSet = true;
-            while( i < lineLength ){
-                if( (s[i] > 'a' && s[i] < 'z') || (s[i] > 'A' && s[i] < 'Z') ){
-
-                }
-            }*/
-
-        }
-
-    }
+    string stopWords[] =
+        {"the", "for", "in", "on", "a",
+         "an", "of", "to", "at", "by",
+         "onto", "into", "are", "but", "is",
+         "and", "not", "or"
+        };
 
     return 0;
 }

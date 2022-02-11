@@ -44,7 +44,7 @@ using namespace std;
 
 struct WordProcessor{
     string word;
-    int pages[101];
+    int pages[101] = {};
     int currentNumberOfPages = 0;
 };
 
@@ -65,11 +65,12 @@ int main()
     WordProcessor* allWords = new WordProcessor[allWordsCapacity];
 
     string currentLine;
+    int currentPage = 0;
     while( in.peek() != EOF ){
-        int cnt = 0;
-        while( ++cnt <= PAGE_SIZE_IN_ROWS && in.peek() != EOF ){
+        ++currentPage;
+        int cntRows = 0;
+        while( ++cntRows <= PAGE_SIZE_IN_ROWS && in.peek() != EOF ){
             getline(in, currentLine);
-            //cout << currentLine << endl;
 
             /*
                 split
@@ -100,6 +101,53 @@ int main()
                         currentWord = tmp;
                     }
                     cout << currentWord << "|";
+                    /*now we have got a new word*/
+                    /*comparing to already existing words in the array*/
+
+
+
+
+
+                    bool wasFound = false;//was added a new word into collection?
+                    for(int i = 0; i < allWordsLength; i++){
+                        int j = 0;
+                        int compareWordLength = 0;
+                        while( allWords[i].word[compareWordLength]!='\0' ){
+                            compareWordLength++;
+                        }
+
+                        if( compareWordLength != currentWordSize ){
+                            continue;
+                        }
+                        bool equal = true;
+                        for(j = 0; j < currentWordSize; j++){
+                            if( currentWord[j] != allWords[i].word[j] )
+                                equal = false;
+                        }
+                        if( equal ){
+                            int p = allWords[i].currentNumberOfPages;
+                            if( p < 101 ){
+                                allWords[i].pages[p] = currentPage;
+                                allWords[i].currentNumberOfPages++;
+                            }
+                            wasFound = true;
+                            break;
+                        }
+
+                    }
+
+                    if( !wasFound ){
+                        //now add a new word
+                        allWords[allWordsLength].word = currentWord;
+                        allWords[allWordsLength].pages[0] = currentPage;
+                        allWords[allWordsLength].currentNumberOfPages = 1;
+                        allWordsLength++;
+                    }
+
+
+
+
+
                 }else{
                     left++;
                 }
@@ -108,9 +156,19 @@ int main()
 
 
 
-        }
-    }
+        }//cycle on lines in the page
 
+        cout << endl << endl << endl;
+    }//cycle on pages
+
+    cout << "*******************************************" << endl;
+    for(int i = 0; i < allWordsLength; i++){
+        cout << allWords[i].word << "|\n";
+        for(int j = 0; j < allWords[i].currentNumberOfPages; j++){
+            cout << allWords[i].pages[j] << " ";
+        }
+        cout << endl;
+    }
     /*
         sorting
     */

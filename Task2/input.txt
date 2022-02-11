@@ -1,6 +1,15 @@
 Generally speaking we are announcing beta-testing of new functionality. 
-We’d be grateful for any feedback, especially for ideas and bug reports. 
+We'd be grateful for any feedback, especially for ideas and bug reports. 
 We need to carefully test new features in different conditions different 
 platforms, OS and browsers, from different locations, w and wo VPN, etc. 
 Historically our users are the best testers, and we hope you will help us.
 Generally speaking we are announcing beta-testing of new functionality. 
+We'd be grateful for any feedback, especially for ideas and bug reports. 
+We need to carefully test new features in different conditions different 
+platforms, OS and browsers, from different locations, w and wo VPN, etc. 
+Historically our users are the best testers, and we hope you will help us.
+Generally speaking we are announcing beta-testing of new functionality. 
+We'd be grateful for any feedback, especially for ideas and bug reports. 
+We need to carefully test new features in different conditions different 
+platforms, OS and browsers, from different locations, w and wo VPN, etc. 
+Historically our users are the best testers, and we hope you will help us.

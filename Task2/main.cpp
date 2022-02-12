@@ -273,9 +273,6 @@ onPagesCycle:{
                         }
                     }
 
-
-
-
                 }else{
                     left++;
                 }
@@ -289,11 +286,14 @@ onPagesCycle:{
     afterLinesInThePage:
         goto onPagesCycle;
     }//cycle on pages
+
+
 toSorting:
     ofstream out("output.txt");
 
         int i, j;
         i = 0;
+        /*sorting by bubble on alphabetic order of words*/
         for9:{
             if( i >= allWordsLength-1 )
                 goto afterFor9;
@@ -305,6 +305,7 @@ toSorting:
                     goto afterFor10;
 
                 if( allWords[i].word > allWords[j].word ){
+                    /*swapping*/
                     auto tmp = allWords[i];
                     allWords[i] = allWords[j];
                     allWords[j] = tmp;

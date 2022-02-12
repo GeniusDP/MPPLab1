@@ -59,7 +59,7 @@ int main()
     ifstream in("input.txt");
     const int PAGE_SIZE_IN_ROWS = 45;
     const int STOP_WORDS_NUMBER = sizeof(stopWords) / sizeof(string);
-    int allWordsCapacity = 100000;
+    int allWordsCapacity = 10;
     int allWordsLength = 0;
     WordProcessor* allWords = new WordProcessor[allWordsCapacity];
 
@@ -154,6 +154,18 @@ int main()
                         }
 
                         if( !wasFound ){
+                            /*here I am enlarging my allWords-array*/
+                            if( allWordsLength == allWordsCapacity ){
+                                WordProcessor* copyOfAllWordsArray = new WordProcessor[allWordsLength];
+                                for(int l = 0; l < allWordsLength; l++){
+                                    copyOfAllWordsArray[l] = allWords[l];
+                                }
+                                allWordsCapacity *= 2;
+                                allWords = new WordProcessor[allWordsCapacity];
+                                for(int l = 0; l < allWordsLength; l++){
+                                    allWords[l] = copyOfAllWordsArray[l];
+                                }
+                            }
                             //now add a new word
                             allWords[allWordsLength].word = currentWord;
                             allWords[allWordsLength].pages[0] = currentPage;

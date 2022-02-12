@@ -155,18 +155,32 @@ onPagesCycle:{
                         }
                     afterFor2:
 
-                    for(int i = 0; i < currentWord.size(); i++){
-                        if( currentWord[i] >= 'A' && currentWord[i] <= 'Z' )
-                            currentWord[i] += 'a' - 'A';
-                    }
 
-                    for(int i = 0; i < STOP_WORDS_NUMBER; i++){
-                        if( stopWords[i] == currentWord )
-                            isANormalWord = false;
-                    }
+                    /*here i am processing current word into lower case*/
+                        it = 0;
+                        for3:{
+                            if( it >= currentWord.size() )
+                                goto afterFor3;
 
+                            if( currentWord[it] >= 'A' && currentWord[it] <= 'Z' )
+                                currentWord[it] += 'a' - 'A';
 
+                            it++;
+                            goto for3;
+                        }
+                    afterFor3:
+                        it = 0;
+                        for4:{
+                            if( it >= STOP_WORDS_NUMBER )
+                                goto afterFor4;
 
+                            if( stopWords[it] == currentWord )
+                                isANormalWord = false;
+
+                            it++;
+                            goto for4;
+                        }
+                    afterFor4:
 
 
                     if(isANormalWord){

@@ -71,7 +71,10 @@ onPagesCycle:{
         }
         ++currentPage;
         int cntRows = 0;
-        while( ++cntRows <= PAGE_SIZE_IN_ROWS && in.peek() != EOF ){
+    onLinesCycle:{
+            if( !( ++cntRows <= PAGE_SIZE_IN_ROWS && in.peek() != EOF ) ){
+                goto afterLinesInThePage;
+            }
             getline(in, currentLine);
 
             /*
@@ -80,7 +83,10 @@ onPagesCycle:{
 
             int left, right;
             left = right = 0;
-            while( currentLine[left] != '\0' ){
+            goThroughLine:{
+                if( currentLine[left] == '\0' ){
+                    goto afterLineRead;
+                }
                 if( currentLine[left] != ' ' ){
                     right = left;
                     while( currentLine[right] != ' ' && currentLine[right] != '\0' ){
@@ -183,12 +189,14 @@ onPagesCycle:{
                 }else{
                     left++;
                 }
+                goto goThroughLine;
             }
+        afterLineRead:
 
 
-
-
+            goto onLinesCycle;
         }//cycle on lines in the page
+    afterLinesInThePage:
         goto onPagesCycle;
     }//cycle on pages
 toSorting:

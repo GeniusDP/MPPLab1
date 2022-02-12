@@ -169,6 +169,7 @@ onPagesCycle:{
                             goto for3;
                         }
                     afterFor3:
+
                         it = 0;
                         for4:{
                             if( it >= STOP_WORDS_NUMBER )
@@ -185,7 +186,52 @@ onPagesCycle:{
 
                     if(isANormalWord){
                         bool wasFound = false;//was added a new word into collection?
-                        for(int i = 0; i < allWordsLength; i++){
+                        int i = 0;
+                        for5:{
+                            if( i >= allWordsLength ){
+                                goto afterFor5;
+                            }
+
+                                int compareWordLength = 0;
+                                    while1:{
+                                        if( allWords[i].word[compareWordLength] == '\0' )
+                                            goto afterWhile1;
+
+                                        compareWordLength++;
+                                        goto while1;
+                                    }
+                                afterWhile1:
+
+                                bool equal = true;
+                                int k = 0;
+                                for6:{
+                                    if( k >= currentWordSize )
+                                        goto afterFor6;
+
+                                    if( currentWord[k] != allWords[i].word[k] )
+                                        equal = false;
+
+                                    k++;
+                                    goto for6;
+                                }
+                            afterFor6:
+
+                                if( equal && compareWordLength == currentWordSize ){
+                                    int p = allWords[i].currentNumberOfPages;
+                                    if( p <= 100 ){
+                                        allWords[i].pages[p] = currentPage;
+                                        allWords[i].currentNumberOfPages++;
+                                    }
+                                    wasFound = true;
+                                    goto afterFor5;
+                                }
+
+                            i++;
+                            goto for5;
+                        }
+                    afterFor5:
+
+                        /*for(int i = 0; i < allWordsLength; i++){
 
                             int compareWordLength = 0;
                             while( allWords[i].word[compareWordLength] != '\0' ){
@@ -208,7 +254,7 @@ onPagesCycle:{
                                 break;
                             }
 
-                        }
+                        }*/
 
                         if( !wasFound ){
                             /*here I am enlarging my allWords-array*/

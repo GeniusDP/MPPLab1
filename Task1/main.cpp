@@ -89,6 +89,7 @@ int main()
             //(according to C++ standard)
             j = 0;
             foundInStopWords = false;
+            /*here i have filtered on stop-words*/
             filterStopWords:
                 if( j >= sizeof(stopWords) / sizeof(string) ){
                     goto afterFilterStopWords;
@@ -103,6 +104,7 @@ int main()
 
             if( !foundInStopWords ){
                 bool found = false;
+                /*here i am counting similar words (if this word was above)*/
                 j = 0;
                 countingSimilars:
                     if(j >= wordsLength){
@@ -115,7 +117,9 @@ int main()
                     j++;
                 goto countingSimilars;
             afterCountingSimilars:
+                /*if did not such word before then add it*/
                 if( !found ){
+                    /*and also i care about out of range*/
                     if(wordsLength + 1 > wordsCapacity){
                             wordsCapacity *= 2;
                             Pair* tmpWords = new Pair[wordsCapacity];

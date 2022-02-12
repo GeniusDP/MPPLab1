@@ -292,22 +292,70 @@ onPagesCycle:{
 toSorting:
     ofstream out("output.txt");
 
-    for(int i = 0; i < allWordsLength-1; i++){
-        for(int j = i + 1; j < allWordsLength; j++){
-            if( allWords[i].word > allWords[j].word )swap(allWords[i], allWords[j]);
-        }
-    }
+        int i, j;
+        i = 0;
+        for9:{
+            if( i >= allWordsLength-1 )
+                goto afterFor9;
 
+            /*inner for*/
+            j = i + 1;
+            for10:{
+                if( j >= allWordsLength )
+                    goto afterFor10;
 
-    for(int i = 0; i < allWordsLength; i++){
-        if( allWords[i].currentNumberOfPages < 101 ){
-            out << allWords[i].word << " ---> ";
-            for(int j = 0; j < allWords[i].currentNumberOfPages; j++){
-                out << allWords[i].pages[j] << " ";
+                if( allWords[i].word > allWords[j].word ){
+                    auto tmp = allWords[i];
+                    allWords[i] = allWords[j];
+                    allWords[j] = tmp;
+                }
+
+                j++;
+                goto for10;
             }
-            out << endl;
+            afterFor10:
+
+            /*the end of inner for*/
+
+            i++;
+            goto for9;
         }
-    }
+    afterFor9:
+
+
+
+
+    /*here i am printing this mess into output.txt*/
+    /*2 cycles*/
+        i = 0;
+        for11:{
+            if( i >= allWordsLength ){
+                goto afterFor11;
+            }
+
+            if( allWords[i].currentNumberOfPages < 101 ){
+                out << allWords[i].word << " ---> ";
+
+
+                    j = 0;
+                    for12:{
+                        if( j >= allWords[i].currentNumberOfPages ){
+                            goto afterFor12;
+                        }
+
+                            out << allWords[i].pages[j] << " ";
+
+                        j++;
+                        goto for12;
+                    }
+                afterFor12:
+                    out << endl;
+            }
+
+            i++;
+            goto for11;
+        }
+    afterFor11:
 
 
     out.close();

@@ -65,7 +65,10 @@ int main()
 
     string currentLine;
     int currentPage = 0;
-    while( in.peek() != EOF ){
+onPagesCycle:{
+        if( in.peek() == EOF ){
+            goto toSorting;
+        }
         ++currentPage;
         int cntRows = 0;
         while( ++cntRows <= PAGE_SIZE_IN_ROWS && in.peek() != EOF ){
@@ -186,8 +189,9 @@ int main()
 
 
         }//cycle on lines in the page
+        goto onPagesCycle;
     }//cycle on pages
-
+toSorting:
     ofstream out("output.txt");
 
     for(int i = 0; i < allWordsLength-1; i++){

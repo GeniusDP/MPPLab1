@@ -61,11 +61,13 @@ int main()
         };
         int j = 0;
         bool foundInStopWords = false;
+        /*here i am inputing data form the file*/
     whileTrue:
             if( !(in >> currentWord) ){
                 goto afterWhileTrue;
             }
 
+            /*converting into lowercase*/
             j = 0;
             whileToLowerCase:
                 if( currentWord[j] == '\0' ){

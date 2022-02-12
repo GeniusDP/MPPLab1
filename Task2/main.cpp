@@ -231,43 +231,39 @@ onPagesCycle:{
                         }
                     afterFor5:
 
-                        /*for(int i = 0; i < allWordsLength; i++){
-
-                            int compareWordLength = 0;
-                            while( allWords[i].word[compareWordLength] != '\0' ){
-                                compareWordLength++;
-                            }
-                            bool equal = true;
-                            for(int k = 0; k < currentWordSize; k++){
-                                if( currentWord[k] != allWords[i].word[k] )
-                                    equal = false;
-                            }
-
-
-                            if( equal && compareWordLength == currentWordSize ){
-                                int p = allWords[i].currentNumberOfPages;
-                                if( p <= 100 ){
-                                    allWords[i].pages[p] = currentPage;
-                                    allWords[i].currentNumberOfPages++;
-                                }
-                                wasFound = true;
-                                break;
-                            }
-
-                        }*/
-
                         if( !wasFound ){
                             /*here I am enlarging my allWords-array*/
                             if( allWordsLength == allWordsCapacity ){
                                 WordProcessor* copyOfAllWordsArray = new WordProcessor[allWordsLength];
-                                for(int l = 0; l < allWordsLength; l++){
-                                    copyOfAllWordsArray[l] = allWords[l];
-                                }
+                                int l;
+                                l = 0;
+                                    for7:{
+                                        if( l >= allWordsLength )
+                                            goto afterFor7;
+
+                                        copyOfAllWordsArray[l] = allWords[l];
+
+                                        l++;
+                                        goto for7;
+                                    }
+                                afterFor7:
                                 allWordsCapacity *= 2;
                                 allWords = new WordProcessor[allWordsCapacity];
-                                for(int l = 0; l < allWordsLength; l++){
+
+                                l = 0;
+                                for8:{
+                                    if( l >= allWordsLength )
+                                        goto afterFor8;
+
                                     allWords[l] = copyOfAllWordsArray[l];
+
+                                    l++;
+                                    goto for8;
                                 }
+                                afterFor8:
+                                //needed, because it is impossible to set
+                                //label just before "}" token
+                                if(true);
                             }
                             //now add a new word
                             allWords[allWordsLength].word = currentWord;

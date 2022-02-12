@@ -89,24 +89,47 @@ onPagesCycle:{
                 }
                 if( currentLine[left] != ' ' ){
                     right = left;
-                    while( currentLine[right] != ' ' && currentLine[right] != '\0' ){
+                    /*
+                        here i am increasing right,
+                        until it stands after current word
+                    */
+                    rightIncreaser:{
+                        if( !( currentLine[right] != ' ' && currentLine[right] != '\0' ) ){
+                            goto afterRightIncreaser;
+                        }
                         right++;
+                        goto rightIncreaser;
                     }
+                    /*here i am processing current word*/
+                afterRightIncreaser:
                     string currentWord = "";
                     int currentWordSize = right-left;
-                    while( left < right ){
+                currentWordReading:{
+                        if( left >= right ){
+                            goto afterCurrentWordReading;
+                        }
+
                         currentWord += currentLine[left];
                         left++;
+                        goto currentWordReading;
                     }
+                afterCurrentWordReading:
                     if( currentWord[currentWordSize-1] == '.' || currentWord[currentWordSize-1] == ','
                        || currentWord[currentWordSize-1] == '!' || currentWord[currentWordSize-1] == '?'
                        || currentWord[currentWordSize-1] == ':' || currentWord[currentWordSize-1] == ';'
                        || currentWord[currentWordSize-1] == '"' || currentWord[currentWordSize-1] == '\''){
                         //so that is why we`re deleting last character
                         string tmp = "";
-                        for(int i = 0; i < currentWordSize-1; i++){
-                            tmp += currentWord[i];
-                        }
+                            int i1 = 0;
+                            for1:{
+                                if( i1 >= currentWordSize-1 ){
+                                    goto afterFor1;
+                                }
+                                tmp += currentWord[i1];
+                                i1++;
+                                goto for1;
+                            }
+                        afterFor1:
                         currentWord = tmp;
                         currentWordSize--;
                     }
@@ -114,12 +137,23 @@ onPagesCycle:{
                     /*now we have got a new word*/
                     /*comparing to already existing words in the array*/
 
-                    bool isANormalWord = true;
-                    for(int it = 0; it < currentWord.size(); it++){
-                        if( !( (currentWord[it]>='A' && currentWord[it]<='Z') || (currentWord[it]>='a' && currentWord[it]<='z') ) ){
-                            isANormalWord = false;
+                    bool isANormalWord = true;//if this word is really a word(not a char sequence at all);
+                        int it = 0;
+                        /*here i am parsing word */
+                        for2:{
+                            if( it >= currentWord.size() ){
+                                goto afterFor2;
+                            }
+
+                                if( !( (currentWord[it]>='A' && currentWord[it]<='Z')
+                                    || (currentWord[it]>='a' && currentWord[it]<='z') ) ){
+                                    isANormalWord = false;
+                                }
+
+                            it++;
+                            goto for2;
                         }
-                    }
+                    afterFor2:
 
                     for(int i = 0; i < currentWord.size(); i++){
                         if( currentWord[i] >= 'A' && currentWord[i] <= 'Z' )
